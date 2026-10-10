@@ -1,0 +1,11 @@
+specVersion: "v1"
+serviceId: "feedbackai-4424d-service"
+location: "europe-west9"
+schema:
+  source: "./schema"
+  datasource:
+    postgresql:
+      database: "feedbackai-4424d-database"
+      cloudSql:
+        instanceId: "feedbackai-4424d-instance"
+connectorDirs: ["./connector"]

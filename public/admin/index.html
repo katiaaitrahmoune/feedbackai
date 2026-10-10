@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="robots" content="noindex">
+  <title>FeedbackAI · Admin</title>
+  <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+  <!-- LOGIN -->
+  <main id="login-view" class="login" hidden>
+    <form id="login-form" class="card login-card">
+      <div class="brand"><span class="logo">F</span><span>FeedbackAI</span></div>
+      <h1>Admin sign in</h1>
+      <p class="muted">Access the feedback analytics dashboard.</p>
+      <label>Email
+        <input id="email" type="email" required autocomplete="username" autofocus>
+      </label>
+      <label>Password
+        <input id="password" type="password" required autocomplete="current-password">
+      </label>
+      <p id="login-error" class="error" role="alert" hidden></p>
+      <button id="login-btn" class="btn primary" type="submit">Sign in</button>
+    </form>
+  </main>
+
+  <!-- DASHBOARD -->
+  <div id="app-view" hidden>
+    <header class="topbar">
+      <div class="brand"><span class="logo">F</span><span>FeedbackAI</span><span id="company" class="muted"></span></div>
+      <nav class="tabs" id="tabs">
+        <button class="tab" data-tab="overview">Overview</button>
+        <button class="tab" data-tab="feedbacks">Feedbacks</button>
+        <button class="tab" data-tab="risk">At-risk customers</button>
+      </nav>
+      <div class="actions">
+        <button id="refresh" class="btn ghost" type="button">Refresh</button>
+        <button id="logout" class="btn ghost" type="button">Sign out</button>
+      </div>
+    </header>
+    <main id="content" class="content"></main>
+  </div>
+
+  <dialog id="modal" class="modal"></dialog>
+  <script src="admin.js"></script>
+</body>
+</html>

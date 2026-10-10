@@ -1,0 +1,6 @@
+connectorId: "default"
+generate:
+  javascriptSdk:
+    outputDir: "../../src/generated"
+    package: "@feedbackai/dataconnect"
+    packageJsonDir: "../.."

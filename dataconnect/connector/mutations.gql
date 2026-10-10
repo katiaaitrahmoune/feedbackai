@@ -1,0 +1,59 @@
+mutation CreateFeedback($customerName: String!, $customerEmail: String!, $reason: String!)
+@auth(level: NO_ACCESS) {
+  feedback_insert(data: {
+    customerName: $customerName
+    customerEmail: $customerEmail
+    reason: $reason
+  })
+} 
+mutation UpdateFeedbackAnalysis(
+  $id: UUID!
+  $sentiment: String!
+  $category: String!
+  $priority: String!
+  $mainIssue: String!
+  $status: String!
+) @auth(level: NO_ACCESS) {
+  feedback_update(id: $id, data: {
+    sentiment: $sentiment
+    category: $category
+    priority: $priority
+    mainIssue: $mainIssue
+    status: $status
+  })
+}
+mutation CreateCompany(
+  $name: String!, $description: String, $headquarters: String,
+  $foundedYear: Int, $website: String, $parentGroup: String
+) @auth(level: NO_ACCESS) {
+  company_insert(data: {
+    name: $name, description: $description, headquarters: $headquarters,
+    foundedYear: $foundedYear, website: $website, parentGroup: $parentGroup
+  })
+}
+
+mutation CreateDivision($name: String!, $description: String, $email: String)
+@auth(level: NO_ACCESS) {
+  division_insert(data: { name: $name, description: $description, email: $email })
+}
+
+mutation UpdateDivisionEmail($id: UUID!, $email: String!) @auth(level: NO_ACCESS) {
+  division_update(id: $id, data: { email: $email })
+}
+
+mutation CreateService($divisionId: UUID!, $name: String!, $description: String)
+@auth(level: NO_ACCESS) {
+  service_insert(data: { divisionId: $divisionId, name: $name, description: $description })
+}
+mutation UpdateFeedbackAiResponse(
+  $id: UUID!
+  $aiResponse: String
+  $needsHuman: Boolean
+  $emailSent: Boolean
+) @auth(level: NO_ACCESS) {
+  feedback_update(id: $id, data: {
+    aiResponse: $aiResponse
+    needsHuman: $needsHuman
+    emailSent: $emailSent
+  })
+}

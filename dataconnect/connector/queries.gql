@@ -1,0 +1,24 @@
+query ListFeedbacks @auth(level: NO_ACCESS) {
+  feedbacks(orderBy: { createdAt: DESC }) {
+    id customerName customerEmail reason
+    sentiment category priority mainIssue aiResponse
+    status needsHuman emailSent createdAt
+  }
+}
+
+query GetFeedback($id: UUID!) @auth(level: NO_ACCESS) {
+  feedback(id: $id) {
+    id customerName customerEmail reason
+    sentiment category priority mainIssue aiResponse
+    status needsHuman emailSent createdAt
+  }
+}
+query GetCompanyInfo @auth(level: NO_ACCESS) {
+  companies(limit: 1) {
+    name description headquarters foundedYear website parentGroup
+  }
+  divisions(orderBy: { name: ASC }) {
+    id name description email
+    services_on_division { id name description }
+  }
+}

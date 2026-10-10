@@ -1,0 +1,44 @@
+type Feedback @table {
+  id: UUID! @default(expr: "uuidV4()")
+
+  # submitted by the customer
+  customerName: String!
+  customerEmail: String!
+  reason: String!
+
+  # filled later by the AI (steps 2 to 4)
+  sentiment: String
+  category: String
+  priority: String
+  mainIssue: String
+  aiResponse: String
+
+  # workflow
+  status: String! @default(value: "NEW")
+  needsHuman: Boolean! @default(value: false)
+  emailSent: Boolean! @default(value: false)
+  createdAt: Timestamp! @default(expr: "request.time")
+}
+type Company @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String!
+  description: String
+  headquarters: String
+  foundedYear: Int
+  website: String
+  parentGroup: String
+}
+
+type Division @table {
+  id: UUID! @default(expr: "uuidV4()")
+  name: String!
+  description: String
+  email: String
+}
+
+type Service @table {
+  id: UUID! @default(expr: "uuidV4()")
+  division: Division!
+  name: String!
+  description: String
+}
