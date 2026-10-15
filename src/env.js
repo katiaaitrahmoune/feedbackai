@@ -21,13 +21,13 @@ module.exports = {
   aiTimeoutMs: Number(process.env.AI_TIMEOUT_MS) || 30000,
   firebaseServiceAccount: loadServiceAccount(),
 
-  // admin dashboard
+
   admin: {
     email: process.env.ADMIN_EMAIL,
     password: process.env.ADMIN_PASSWORD,
     jwtSecret: process.env.ADMIN_JWT_SECRET,
     tokenTtl: process.env.ADMIN_TOKEN_TTL || '8h',
   },
-  // optional: lets n8n / internal tools call protected endpoints with an `x-api-key` header
+  
   serviceApiKey: process.env.SERVICE_API_KEY,
 };
