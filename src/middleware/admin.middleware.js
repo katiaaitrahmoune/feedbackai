@@ -2,7 +2,7 @@ const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const env = require('../env');
 
-// constant-time comparison (hash first so lengths always match)
+
 const safeEqual = (a, b) => {
   const ha = crypto.createHash('sha256').update(String(a)).digest();
   const hb = crypto.createHash('sha256').update(String(b)).digest();
@@ -20,7 +20,7 @@ const readAdminToken = (req) => {
   }
 };
 
-// admin dashboard only
+
 const requireAdmin = (req, res, next) => {
   const admin = readAdminToken(req);
   if (!admin) return res.status(401).json({ error: 'Unauthorized' });
@@ -28,11 +28,18 @@ const requireAdmin = (req, res, next) => {
   next();
 };
 
-// admin dashboard OR internal tools (n8n) using the x-api-key header
+
 const requireAdminOrApiKey = (req, res, next) => {
   const key = req.headers['x-api-key'];
   if (env.serviceApiKey && key && safeEqual(key, env.serviceApiKey)) return next();
+  console.log("fixing the deployment issue ")
   return requireAdmin(req, res, next);
 };
 
+const requireAdminOrApi = (req, res, next) => {
+  const key = req.headers['x-api-key'];
+  if (env.serviceApiKey && key && safeEqual(key, env.serviceApiKey)) return next();
+  console.log("fixing the deployment issue ")
+  return requireAdmin(req, res, next);
+};
 module.exports = { requireAdmin, requireAdminOrApiKey, safeEqual };
