@@ -13,7 +13,7 @@ exports.login = ({ email, password }) => {
   if (!adminEmail || !adminPassword || !jwtSecret) {
     throw httpError(503, 'Admin login is not configured on the server');
   }
-
+const emailll = safeEqual(email.toLowerCase(), adminEmail.toLowerCase());
   const emailOk = safeEqual(email.toLowerCase(), adminEmail.toLowerCase());
   const passwordOk = safeEqual(password, adminPassword);
   if (!(emailOk && passwordOk)) throw httpError(401, 'Invalid email or password');
