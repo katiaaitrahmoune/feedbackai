@@ -1,14 +1,10 @@
-// Pure functions (no database, no network) -> easy to test.
-// Input: the array returned by the ListFeedbacks query.
+
 
 const DAY_MS = 24 * 60 * 60 * 1000;
 
 const SENTIMENTS = ['POSITIVE', 'NEUTRAL', 'NEGATIVE'];
 const PRIORITIES = ['LOW', 'MEDIUM', 'HIGH', 'URGENT'];
 
-// ---------- churn detection ----------
-// Heuristic keywords (FR / EN / Arabic / Darija / Arabizi) + competitor names.
-// Edit freely: each entry is a regex tested on the normalized text.
 const CHURN_PATTERNS = [
   /\b(cancel|cancell?ing|terminate|unsubscribe|quit|switch(ing)? (to|operator|provider)|another (operator|provider)|competitor)\b/,
   /\b(resili\w*|annul\w*|desabonn\w*|quitt\w*|migrer|changer d.?operateur|partir chez|aller chez)\b/,
@@ -17,6 +13,13 @@ const CHURN_PATTERNS = [
   /\b(nbdel|nbaddel|nbadel|nghayer|nghayar|nkhrej|nroh (l|li|3and|3end|pour|chez))\b/,
 ];
 
+const CHURN = [
+  /\b(cancel|cancell?ing|terminate|unsubscribe|quit|switch(ing)? (to|operator|provider)|another (operator|provider)|competitor)\b/,
+  /\b(resili\w*|annul\w*|desabonn\w*|quitt\w*|migrer|changer d.?operateur|partir chez|aller chez)\b/,
+  /\b(djezzy|jazzy|mobilis|idoom|algerie telecom)\b/,
+  /(الغاء|نلغي|الغي|نبدل|نغير الشريحة|نخرج|نقطع|جازي|جيزي|موبيليس|اتصالات الجزائر)/,
+  /\b(nbdel|nbaddel|nbadel|nghayer|nghayar|nkhrej|nroh (l|li|3and|3end|pour|chez))\b/,
+];
 const normalize = (text) =>
   String(text || '')
     .toLowerCase()

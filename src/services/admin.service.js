@@ -18,6 +18,7 @@ exports.login = ({ email, password }) => {
   const passwordOk = safeEqual(password, adminPassword);
   if (!(emailOk && passwordOk)) throw httpError(401, 'Invalid email or password');
 console.log("fucking forget to pushhhh")
+
   const token = jwt.sign({ role: 'admin', email: adminEmail }, jwtSecret, { expiresIn: tokenTtl });
   return { token, email: adminEmail, expiresIn: tokenTtl };
 };
